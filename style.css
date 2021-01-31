@@ -1,0 +1,373 @@
+/* GLOBAL RULES*/
+* {
+    padding: 0; 
+    margin: 0; 
+    box-sizing: border-box; 
+    font-family: 'Raleway', sans-serif;
+}
+
+#main {
+    width: 100vw; /* -> Ensures content always takes up 100% of viewport width*/
+    max-width: 100%; /* -> Prevents horizontal scrollbar creating a vertical scrollbar*/
+}
+
+/* CSS VARIABLES */
+
+:root {
+    --primary: #c5aa7a;  
+    --secondary: #D3D3D3; 
+    --dark: #000000; 
+    --white: #f8f8ff; 
+    --padding: 15px 30px; 
+    --center-padding: 0px 15%; 
+}
+
+/* SMOOTH SCROLL */
+html {
+    scroll-behavior: smooth; 
+}
+
+/* HERO BANNER */
+#heroBanner {
+    height: 100vh; /* -> Sets the front page as nav bar & banner*/ 
+    min-height: 100vh;  
+    padding: var(--padding);
+    background-color: var(--dark); 
+}
+
+
+    /*-- NAV SECTION */
+
+#nav {
+    padding: 20px; 
+    position: fixed; 
+    top: 0; 
+    right: 0; 
+    left: 0; 
+    z-index: 1; 
+    background: var(--dark); 
+}
+
+        /*---- NAV LIST SECTION */
+#nav ul {
+    list-style: none; /* -> Removes bullet points */
+    display: grid; /* -> Allows position manipul. of each li */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); /* -> Sets responsive nav bar cells */
+    grid-row-gap: 10px; /* -> Creates a space between rows, applicable when the screen size collapses. */
+    justify-items: center; /* -> Centers & compresses each li's content horizontally*/
+    height: 100%; /* -> Sets ul height to 100% of nav section. */
+}
+
+#nav li {
+    height: 100%;  /* -> Sets li height */
+    display: flex; /* -> Allows manipul. of child elements*/
+    align-items: center; /* -> Centers vertical placement*/
+}
+
+#nav li a::after {
+    content: ""; /* -> Overrides the default value 'normal', which equates to none. */
+    display: block; /* -> Overrides the default 'inline', where height and width properties have no effect.*/
+    height: 1px; 
+    background-color: var(--primary);  
+    width: 0%; /* Underline cannot be seen in normal state. */
+}
+
+#nav a {
+    text-decoration: none; /* -> Removes default underline*/
+    color: var(--secondary);
+}
+
+#nav li.active a { 
+    color: var(--primary); 
+}
+
+        /*---- NAV LIST HOVER EFFECTS */
+
+#nav li:hover a {
+    color: var(--primary); 
+}
+
+#nav li:hover {
+    animation-name: highlight; 
+    animation-duration: 0.2s; 
+    animation-fill-mode: forwards; 
+}
+
+#nav li:hover a::after {
+    animation-name: underline; 
+    animation-duration: 0.5s; 
+    animation-fill-mode: forwards; 
+}
+
+        /*---- NAV LIST ANIMATIONS */
+@keyframes underline {
+    0% {
+        width: 0%; 
+    }
+    100% {
+        width: 100%; 
+    }
+}
+
+@keyframes highlight {
+    100% {
+        position: relative; 
+        bottom: 2px; 
+    }
+}
+
+    /*-- BANNER SECTION */
+#banner {  
+    height: 90%; /* -> Parent container height must be set in order to manipul. child img height */
+    position: relative; /* -> Setting parent element with position value in order to manipul. position of child .text element.*/
+}
+
+#banner img {
+    width: 100%; /* -> Forces img to equal parent's width*/
+    height: 100%; /* -> Forces img to equal parent's height, which is 95% of 100vh*/
+    object-fit: cover; /* -> Img crops to fit specified height&width without affecting stretching/distorting img.*/  
+    z-index: -2; /* -> Pushes into BG, allows future text to sit on top of img.*/
+    object-position: center center; 
+}
+
+#banner .text {
+    color: white;  
+    position: absolute; /* -> Removes out of html flow, can be positioned based on parent element (#banner).*/
+    top: 30%;  
+    left: 50%; /* -> Centers text */
+    margin-left: 200px; /* -> Pushes text to the right*/
+    text-align: center; 
+}
+
+#banner .text h1 {
+    font-size: 36px; 
+}
+
+#banner .text p { 
+    font-style: italic; 
+}
+
+
+/* DESCRIPTION SECTION */
+#description {
+    background-color: var(--dark);  
+    padding: 10px 25%;  
+    color: var(--secondary); 
+    text-align: center; 
+}
+
+#description h2 {
+    margin-bottom: 30px; 
+}
+
+/* FILMOGRAPHY SECTION */
+#filmography {
+    background-color: var(--white); 
+}
+#filmography img {
+    border-radius: 100%; 
+    height: 200px; 
+    width: 200px; 
+    object-fit: cover; 
+}
+
+#filmography {
+    display: grid; 
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); 
+    text-align: center; /* -> Aligns all the inner content of inline and/or inline-block elements. An inheritable property. */
+    padding: var(--center-padding); 
+    grid-row-gap: 50px; 
+}
+
+.movie1 img {
+    object-position: -25px;  
+}
+
+/* FUN FACTS SECTION */
+
+#funFacts {
+    background-color: #333333; 
+    padding: var(--padding);
+    display: grid; 
+    grid-template-areas: 
+        "title title title"
+        ". pointer1 fact1"
+        "fact2 pointer2 ."
+        ". pointer3 fact3"
+        "fact4 pointer4 ."; 
+    grid-column-gap: 30px; 
+    grid-row-gap: 50px; 
+}
+
+#funFacts .title {
+    grid-area: title; 
+    text-align: center; 
+}
+
+    /*-- Aligning Facts & Arrows */
+.fun-fact1 {
+    grid-area: fact1; 
+    text-align: start; 
+}
+
+.fun-fact2 {
+    grid-area: fact2;
+    text-align: end;  
+}
+
+.fun-fact3 {
+    grid-area: fact3; 
+    text-align: start; 
+}
+
+.fun-fact4 {
+    grid-area: fact4; 
+    text-align: end;
+}
+
+i.pointer1 {
+    grid-area: pointer1; 
+}
+
+i.pointer2 {
+    grid-area: pointer2;  
+}
+
+i.pointer3 {
+    grid-area: pointer3;  
+}
+
+i.pointer4 {
+    grid-area: pointer4;  
+}
+
+#funFacts  {
+    align-items: center; /* -> Vertically aligns all the grid items, however only the arrow sees notable movement bcos the text content cannot be further condensed.*/
+}
+
+#funFacts h1 {
+    color: var(--secondary); 
+}
+
+.fun-fact  h2{
+    color: var(--white)
+}
+
+.fun-fact p {
+    color: var(--secondary); 
+}
+#funFacts i {
+    color: var(--dark); 
+    font-size: 30px; 
+}
+
+
+/* FIND OUT MORE SECTION */
+#findOutMore { 
+    background-color: var(--dark);  
+    color: var(--secondary); 
+    padding: var(--padding);
+}
+
+#findOutMore h2 {
+    text-align: center; 
+    padding-bottom: 30px; 
+}
+
+#tribute-links ul {
+    display: grid; 
+    grid-template-rows: repeat(3, 1fr); 
+    list-style: none; 
+    justify-items: center; 
+}
+
+#tribute-links li {
+    padding: var(--padding); 
+    font-size: 22px; 
+}
+
+#tribute-links a {
+    text-decoration: none; 
+    color: var(--white); 
+}
+
+#tribute-links a::after {
+    content:""; 
+    display: block; 
+    height: 1px; 
+    background-color: var(--primary);  
+    width: 0%; 
+}
+
+#tribute-links li:hover a {
+    color: var(--primary); 
+}
+
+#tribute-links li:hover a::after {
+    animation-name: underline; 
+    animation-duration: 0.3s; 
+    animation-fill-mode: forwards; 
+}
+
+
+
+/* FOOTER SECTION */
+#footer {
+    background-color: var(--dark); 
+    color: var(--primary); 
+    height: 10vh; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+}
+
+
+
+
+/* MEDIA QUERIES */
+
+@media only screen and (max-width: 700px) {
+    #funFacts {
+        grid-template-areas: 
+            "title"
+            "fact1" 
+            "fact2"
+            "fact3"
+            "fact4"; 
+    }
+    
+    .fun-fact {
+        text-align: center; 
+    }
+    
+    
+    #funFacts i {
+        display: none; 
+    }
+}
+
+@media only screen and (max-width:650px) {
+    #banner {  
+    position: static; 
+    display: flex; 
+    flex-direction: column;  
+    }
+    
+    #banner img {
+        z-index: 0; 
+    }
+
+    #banner .text {
+        color: white;  
+        position: static; /* -> Returns to deefault position */
+        margin-left: 0px; /* -> Pushes text to the right*/ 
+    }
+    
+ 
+}
+
+
+
+
+
+
